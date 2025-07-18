@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { cn } from "@/utils/cn";
+import { useSelector } from "react-redux";
+import { AuthContext } from "@/App";
 import ApperIcon from "@/components/ApperIcon";
-import SearchBar from "@/components/molecules/SearchBar";
 import ViewToggle from "@/components/molecules/ViewToggle";
+import SearchBar from "@/components/molecules/SearchBar";
 import Button from "@/components/atoms/Button";
-
+import { cn } from "@/utils/cn";
 const Header = ({ 
   onSearch, 
   currentView, 
@@ -15,6 +16,8 @@ const Header = ({
 }) => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { logout } = useContext(AuthContext);
 
   const navigation = [
     { name: "Browse", href: "/browse", icon: "Home" },
@@ -24,6 +27,14 @@ const Header = ({
 
   const isActive = (href) => {
     return location.pathname === href || (href === "/browse" && location.pathname === "/");
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
@@ -61,8 +72,28 @@ const Header = ({
                   </span>
                 )}
               </Link>
-            ))}
+))}
           </nav>
+
+          {/* User Actions */}
+          <div className="hidden md:flex items-center space-x-4">
+            {isAuthenticated && user && (
+              <div className="flex items-center space-x-3">
+                <span className="text-sm text-gray-600">
+                  Welcome, {user.firstName || user.name || 'User'}
+                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="flex items-center space-x-1"
+                >
+                  <ApperIcon name="LogOut" className="w-4 h-4" />
+                  <span>Logout</span>
+                </Button>
+              </div>
+            )}
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -111,8 +142,25 @@ const Header = ({
                     {item.count}
                   </span>
                 )}
+)}
               </Link>
             ))}
+            
+            {/* Mobile User Actions */}
+            {isAuthenticated && user && (
+              <div className="border-t border-gray-200 mt-2 pt-2">
+                <div className="px-3 py-2 text-sm text-gray-600">
+                  Welcome, {user.firstName || user.name || 'User'}
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center space-x-2 w-full px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                >
+                  <ApperIcon name="LogOut" className="w-4 h-4" />
+<span>Logout</span>
+                </button>
+              </div>
+            )}
           </nav>
         </div>
       )}
