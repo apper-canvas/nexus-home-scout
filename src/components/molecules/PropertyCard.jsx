@@ -95,6 +95,13 @@ const PropertyCard = ({
               </span>
             </div>
             
+{property.phone && (
+              <div className="flex items-center text-sm text-gray-600 mb-3">
+                <ApperIcon name="Phone" className="w-4 h-4 mr-1 flex-shrink-0" />
+                <span>{property.phone}</span>
+              </div>
+            )}
+            
             <div className="flex items-center justify-between">
               <div className="text-xs text-gray-500">
                 Listed {format(new Date(property.listingDate), "MMM d, yyyy")}

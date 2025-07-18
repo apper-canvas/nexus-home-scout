@@ -325,8 +325,14 @@ const PropertyDetail = () => {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Contact Card */}
-          <div className="bg-white rounded-xl shadow-card p-6">
+<div className="bg-white rounded-xl shadow-card p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Agent</h3>
+            {property.phone && (
+              <div className="flex items-center text-sm text-gray-600 mb-4 p-3 bg-gray-50 rounded-lg">
+                <ApperIcon name="Phone" className="w-4 h-4 mr-2 flex-shrink-0" />
+                <span className="font-medium">{property.phone}</span>
+              </div>
+            )}
             <div className="space-y-4">
               <Button className="w-full">
                 <ApperIcon name="Phone" className="w-4 h-4 mr-2" />

@@ -27,9 +27,10 @@ const transformToDatabase = (mockData) => {
     description_c: mockData.description,
     features_c: Array.isArray(mockData.features) ? mockData.features.join(',') : mockData.features_c,
     year_built_c: mockData.yearBuilt,
-    listing_date_c: mockData.listingDate,
+listing_date_c: mockData.listingDate,
     coordinates_lat_c: mockData.coordinates?.lat,
     coordinates_lng_c: mockData.coordinates?.lng,
+    phone_c: mockData.phone,
     Tags: Array.isArray(mockData.tags) ? mockData.tags.join(',') : mockData.Tags
   };
 };
@@ -57,8 +58,9 @@ const transformFromDatabase = (dbData) => {
     listingDate: dbData.listing_date_c,
     coordinates: {
       lat: dbData.coordinates_lat_c,
-      lng: dbData.coordinates_lng_c
+lng: dbData.coordinates_lng_c
     },
+    phone: dbData.phone_c,
     tags: dbData.Tags ? dbData.Tags.split(',') : []
   };
 };
@@ -86,8 +88,9 @@ export const propertyService = {
           { field: { Name: "features_c" } },
           { field: { Name: "year_built_c" } },
           { field: { Name: "listing_date_c" } },
-          { field: { Name: "coordinates_lat_c" } },
+{ field: { Name: "coordinates_lat_c" } },
           { field: { Name: "coordinates_lng_c" } },
+          { field: { Name: "phone_c" } },
           { field: { Name: "Tags" } }
         ],
         orderBy: [
@@ -140,8 +143,9 @@ export const propertyService = {
           { field: { Name: "features_c" } },
           { field: { Name: "year_built_c" } },
           { field: { Name: "listing_date_c" } },
-          { field: { Name: "coordinates_lat_c" } },
+{ field: { Name: "coordinates_lat_c" } },
           { field: { Name: "coordinates_lng_c" } },
+          { field: { Name: "phone_c" } },
           { field: { Name: "Tags" } }
         ]
       };
@@ -186,11 +190,11 @@ export const propertyService = {
         features_c: dbData.features_c,
         year_built_c: dbData.year_built_c,
         listing_date_c: dbData.listing_date_c,
-        coordinates_lat_c: dbData.coordinates_lat_c,
+coordinates_lat_c: dbData.coordinates_lat_c,
         coordinates_lng_c: dbData.coordinates_lng_c,
+        phone_c: dbData.phone_c,
         Tags: dbData.Tags
       };
-
       const params = {
         records: [updateableData]
       };
@@ -254,11 +258,11 @@ export const propertyService = {
         features_c: dbData.features_c,
         year_built_c: dbData.year_built_c,
         listing_date_c: dbData.listing_date_c,
-        coordinates_lat_c: dbData.coordinates_lat_c,
+coordinates_lat_c: dbData.coordinates_lat_c,
         coordinates_lng_c: dbData.coordinates_lng_c,
+        phone_c: dbData.phone_c,
         Tags: dbData.Tags
       };
-
       const params = {
         records: [updateableData]
       };
