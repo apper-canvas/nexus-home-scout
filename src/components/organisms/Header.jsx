@@ -70,9 +70,9 @@ const Header = ({
                   <span className="ml-1 bg-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {item.count}
                   </span>
-                )}
+)}
               </Link>
-))}
+            ))}
           </nav>
 
           {/* User Actions */}
@@ -141,7 +141,6 @@ const Header = ({
                   <span className="ml-auto bg-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {item.count}
                   </span>
-                )}
 )}
               </Link>
             ))}
